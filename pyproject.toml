@@ -10,6 +10,9 @@ python = "^3.10"
 fastapi = "^0.109.2"
 sqlalchemy = "^2.0.25"
 pre-commit = "^3.6.0"
+uvicorn = "^0.27.0.post1"
+python-dotenv = "^1.0.1"
+alembic = "^1.13.1"
 
 
 [build-system]
