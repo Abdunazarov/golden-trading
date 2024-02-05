@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "goldtradingtest"
+version = "0.1.0"
+description = ""
+authors = ["Abdunazarov <abdunazarovdior@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.109.2"
+sqlalchemy = "^2.0.25"
+pre-commit = "^3.6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
