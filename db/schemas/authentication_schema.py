@@ -5,6 +5,7 @@ from typing import List, Optional
 # thirdparty
 from pydantic import BaseModel, Field, EmailStr
 
+
 class UserCreateBody(BaseModel):
     username: str = Field(..., min_length=6, max_length=36)
     email: EmailStr
@@ -21,3 +22,13 @@ class RegisterResponse(BaseModel):
     fio: str
     birthday: Optional[datetime.date]
     tags: List[str]
+
+
+class LoginResponse(BaseModel):
+    access_token: str
+    refresh_token: str
+
+
+class LoginBody(BaseModel):
+    username: str = Field(..., min_length=6, max_length=36)
+    password: str
