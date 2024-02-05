@@ -18,6 +18,7 @@ from db.db_setup import get_session
 from settings import EMAIL_PATTERN
 from services.user_service import get_user_by_username, create_user
 from services.authentication_service import create_access_token, create_refresh_token
+from utils.send_email import send_email_async
 
 
 authentication_router = APIRouter(prefix="/auth", tags=["AUTHENTICATION"])
@@ -37,6 +38,13 @@ async def register(data: UserCreateBody, session: AsyncSession = Depends(get_ses
         raise HTTPException(status_code=400, detail="Invalid email format")
 
     user_id = await create_user(session=session, user=data)
+
+    EMAIL_SUBJECT = "Тестовая отправка письма"
+    EMAIL_BODY = (
+        f"Здарова! Ты создал аккаунт на моем сайте. Твой аккаунт: {user.username}"
+    )
+
+    send_email_async(to=data.username.lower(), subject=EMAIL_SUBJECT, body=EMAIL_BODY)
 
     response = RegisterResponse(
         id=user_id,

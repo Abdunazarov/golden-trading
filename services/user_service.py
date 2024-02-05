@@ -7,8 +7,8 @@ from datetime import datetime
 from passlib.hash import bcrypt
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.dialects.postgresql import insert as pg_insert, JSON
-from sqlalchemy import cast
+from sqlalchemy.dialects.postgresql import insert as pg_insert
+from sqlalchemy import delete
 
 # project
 from db.models.user_model import UserModel
@@ -53,6 +53,11 @@ async def get_user_by_id(session: AsyncSession, user_id: int):
     return result.scalar_one_or_none()
 
 
+async def delete_user_by_id(session: AsyncSession, user_id: int):
+    query = delete(UserModel).filter(UserModel.id == user_id)
+    await session.execute(query)
+
+
 async def get_all_users(session: AsyncSession, page: int, limit: int):
     result = await session.execute(select(UserModel))
     return result.scalars().all()
@@ -74,14 +79,7 @@ async def get_users_by_filters(
     if username:
         query = query.filter(UserModel.username.ilike(f"%{username}%"))
 
-    if fio:
-        query = query.filter(UserModel.config["fio"].astext == fio)
-    if birthday:
-        query = query.filter(
-            cast(UserModel.config["birthday"], JSON).astext == birthday.isoformat()
-        )
-    if tag:
-        query = query.filter(UserModel.config["tags"].contains(cast(tag, JSON)))
+    # continue with other params
 
     result = await session.execute(query)
     return result.scalars().all()
