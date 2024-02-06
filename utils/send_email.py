@@ -9,7 +9,7 @@ from fastapi.exceptions import HTTPException
 import settings
 
 
-async def send_email_async(to: str, subject: str, body: str) -> None:
+async def send_email_confirmation(to: str, subject: str, body: str) -> None:
     msg = EmailMessage()
     msg["From"] = settings.SMTP_USERNAME
     msg["To"] = to
