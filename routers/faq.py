@@ -3,9 +3,13 @@ from fastapi import HTTPException, APIRouter
 from pydantic import BaseModel
 from elasticsearch import Elasticsearch, NotFoundError
 
+
+# project
+from settings import ELASTIC_USERNAME, ELASTIC_PASSWORD
+
 faq_router = APIRouter(prefix="/faq", tags=["FAQ"])
 es = Elasticsearch(
-    "http://localhost:9200", basic_auth=("elastic", "zWrI2xttWcEy7Vx=+39a")
+    "http://localhost:9200", basic_auth=(ELASTIC_USERNAME, ELASTIC_PASSWORD)
 )
 
 
