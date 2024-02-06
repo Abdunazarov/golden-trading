@@ -10,6 +10,18 @@ python = "^3.10"
 fastapi = "^0.109.2"
 sqlalchemy = "^2.0.25"
 pre-commit = "^3.6.0"
+uvicorn = "^0.27.0.post1"
+python-dotenv = "^1.0.1"
+alembic = "^1.13.1"
+asyncpg = "^0.29.0"
+psycopg2-binary = "^2.9.9"
+bcrypt = "^4.1.2"
+pydantic = {extras = ["all"], version = "^2.6.1"}
+email-validator = "^2.1.0.post1"
+passlib = "^1.7.4"
+pyjwt = "^2.8.0"
+python-multipart = "^0.0.7"
+aiosmtplib = "^3.0.1"
 
 
 [build-system]
