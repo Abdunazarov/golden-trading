@@ -10,12 +10,14 @@ from starlette.requests import Request
 # project
 from routers.authentication import authentication_router
 from routers.users import users_router
+from routers.rabbitmq import rabbitmq_router
 
 app = FastAPI()
 
 # routers
 app.include_router(authentication_router)
 app.include_router(users_router)
+app.include_router(rabbitmq_router)
 
 
 # middleware for logging
